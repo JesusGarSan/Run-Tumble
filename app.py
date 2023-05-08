@@ -13,7 +13,7 @@ def reiniciar():
     st.session_state.O=[]
 
 def X(x,y,z):
-    st.session_state.X.append([x,y,z])
+        st.session_state.X.append([x,y,z])
 def O(x,y,z):
     st.session_state.O.append([x,y,z])
 
@@ -38,9 +38,10 @@ with COL1.form('submit_x'):
     if st.session_state.turno=='X': disable_X=False
     else: disable_X=True
     if st.form_submit_button('Marcar', use_container_width=True, disabled=disable_X):
-        X(x,y,z)
-        st.session_state.turno='O'
-        st.experimental_rerun()
+        if [x,y,z] not in st.session_state.X and [x,y,z] not in st.session_state.O:
+            X(x,y,z)
+            st.session_state.turno='O'
+            st.experimental_rerun()
 
 with COL3.form('submit_O'):
     col1, col2, col3 = COL3.columns(3)
@@ -51,9 +52,10 @@ with COL3.form('submit_O'):
     if st.session_state.turno=='O': disable_O=False
     else: disable_O=True
     if st.form_submit_button('Marcar', use_container_width=True, disabled=disable_O):
-        O(x,y,z)
-        st.session_state.turno='X'
-        st.experimental_rerun()
+        if [x,y,z] not in st.session_state.X and [x,y,z] not in st.session_state.O:
+            O(x,y,z)
+            st.session_state.turno='X'
+            st.experimental_rerun()
 
 
 
